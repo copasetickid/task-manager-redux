@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createTask } from './actions'
+import { createTask, editTask } from './actions'
 import TasksPage from './components/TasksPage';
 import logo from './logo.svg';
 import './App.css';
@@ -9,7 +9,7 @@ class App extends Component {
   onCreateTask = ({ title, description}) => {
     this.props.dispatch(createTask({title, description}));
   }
-  
+
   render() {
     return (
       <div className="main-content">
