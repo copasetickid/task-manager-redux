@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import TasksPage from './components/TasksPage';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  onCreateTask = ({ title, description}) => {
+    this.props.dispatch({
+      type: 'CREATE_TASK',
+      payload: {
+        title,
+        description
+      }
+    });
+  }
   render() {
     return (
       <div className="main-content">
-        <TasksPage tasks={mockTasks}/>
+        <TasksPage tasks={this.props.tasks} onCreateTask={this.onCreateTask}/>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    tasks: state.tasks
+  }
+}
+
+export default connect(mapStateToProps)(App);
