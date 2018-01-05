@@ -1,18 +1,24 @@
+import { uniqueId } from '../actions';
+
 const mockTasks = [
   {
-    id: 1,
+    id: uniqueId(),
     title: 'Learn Redux',
     description: 'The store, action and reducers, oh my!',
     status: 'In Progress'
   },
   {
-    id: 2,
+    id: uniqueId(),
     title: 'Peace on Earth',
     description: 'No big deal',
     status: 'In Progress'
   },
 ];
 
-export default function tasks(state = [], action) {
+export default function tasks(state = { tasks: mockTasks }, action) {
+  if (action.type === 'CREATE_TASK') {
+    return { tasks: state.tasks.concat(action.payload) }
+  }
+  
   return state;
 }
